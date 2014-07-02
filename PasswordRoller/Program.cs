@@ -10,6 +10,20 @@ namespace PasswordRoller
     {
         static void Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                Console.WriteLine(@"Password Roller will reset password for {0}
+Usage: passwordroller.exe currentPassword [desiredPassword]"
+                    ,Environment.UserName);
+                return;
+            }
+
+            // if one parameter, assume rolling to same password
+            if (args.Length == 1)
+            {
+                args = new[] {args[0], args[0]};
+            }
+
             // whatever value the "Enforce Password History" setting is in group security policy
             const int PasswordHistoryMemory = 12;
 
